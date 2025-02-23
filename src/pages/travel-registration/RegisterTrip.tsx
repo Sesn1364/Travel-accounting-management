@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
 import { setTripName, setTripDate } from "../../store/slices/tripSlice";
 import InputField from "../../components/field/InputField";
+import Button from "../../components/button/Button";
 
 const RegisterTrip: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const RegisterTrip: React.FC = () => {
         value={tripDate}
         onChange={(e) => dispatch(setTripDate(e.target.value))}
       />
+      <Button label="ثبت سفر" onClick={() => console.log("سفر ثبت شد!")} />
     </div>
   );
 };
