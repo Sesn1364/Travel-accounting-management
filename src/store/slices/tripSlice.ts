@@ -1,13 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface Trip {
+  name: string;
+  date: string;
+}
+
 interface TripState {
   tripName: string;
   tripDate: string;
+  trips: Trip[];
 }
 
 const initialState: TripState = {
-  tripName: "سفر جدید",
+  tripName: "",
   tripDate: "",
+  trips: [],
 };
 
 const tripSlice = createSlice({
@@ -20,8 +27,15 @@ const tripSlice = createSlice({
     setTripDate: (state, action: PayloadAction<string>) => {
       state.tripDate = action.payload;
     },
+    addTrip: (state) => {
+      if (state.tripName && state.tripDate) {
+        state.trips.push({ name: state.tripName, date: state.tripDate });
+        state.tripName = "";
+        state.tripDate = "";
+      }
+    },
   },
 });
 
-export const { setTripName, setTripDate } = tripSlice.actions;
+export const { setTripName, setTripDate, addTrip } = tripSlice.actions;
 export default tripSlice.reducer;
