@@ -43,18 +43,40 @@ export const useTrips = () => {
       });
   };
 
-  // تابع حذف سفر
-  const handleDeleteTrip = (tripId: number) => {
-    axios.delete(`http://localhost:5000/trips/${tripId}`)
-      .then(() => {
-        // حذف سفر از Redux
-        const updatedTrips = trips.filter((trip) => trip.id !== tripId);
-        dispatch(setTrips(updatedTrips));
+const handleDeleteTrip = (tripId: number) => {
+    axios.get("http://localhost:5000/passengers") // دریافت لیست مسافران
+      .then(response => {
+        const passengers = response.data;
+  
+        // پیدا کردن مسافرانی که `tripId` آن‌ها برابر با `tripId` سفر موردنظر است
+        const passengersToDelete = passengers.filter((passenger: any) => passenger.tripId === tripId);
+  
+        // حذف هر مسافر مرتبط از `db.json`
+        const deletePassengerRequests = passengersToDelete.map((passenger: any) =>
+          axios.delete(`http://localhost:5000/passengers/${passenger.id}`)
+        );
+  
+        // وقتی همه مسافران حذف شدند، سفر را حذف کن
+        Promise.all(deletePassengerRequests)
+          .then(() => axios.delete(`http://localhost:5000/trips/${tripId}`))
+          .then(() => {
+            // به‌روزرسانی لیست سفرها در Redux
+            const updatedTrips = trips.filter((trip) => trip.id !== tripId);
+            dispatch(setTrips(updatedTrips));
+  
+            // به‌روزرسانی لیست مسافران در Redux
+            const updatedPassengers = passengers.filter((passenger: any) => passenger.tripId !== tripId);
+            dispatch(setTrips(updatedPassengers));
+          })
+          .catch(error => {
+            console.error("خطا در حذف سفر و مسافران مرتبط:", error);
+          });
       })
       .catch(error => {
-        console.error("خطا در حذف سفر:", error);
+        console.error("خطا در دریافت مسافران:", error);
       });
   };
+  
 
   return {
     tripName,
