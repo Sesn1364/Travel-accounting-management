@@ -58,6 +58,17 @@ export const useAccounting = () => {
     }
   };
 
+  // حذف مسافر
+  const handleDeletePassenger = (passengerId: string) => {
+    fetch(`http://localhost:5000/passengers/${passengerId}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setPassengers((prev) => prev.filter((passenger) => passenger.id !== passengerId));
+      })
+      .catch((error) => console.error("Error deleting passenger:", error));
+  };
+
   return {
     trip,
     passengerName,
@@ -69,6 +80,8 @@ export const useAccounting = () => {
     depositGeneralBudget,
     setDepositGeneralBudget,
     passengers,
-    handleRegisterPassenger,
+    handleRegisterPassenger, // ✅ این خط را بررسی کن
+    handleDeletePassenger, // برای حذف مسافر
   };
+  
 };
