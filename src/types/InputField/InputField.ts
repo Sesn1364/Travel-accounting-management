@@ -3,5 +3,8 @@ export interface InputFieldProps {
     type?: string;
     value: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    backgroundColor?: string;
+    textColor?: string;
+    width?: string;
   }
   

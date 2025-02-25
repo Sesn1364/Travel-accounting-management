@@ -1,17 +1,3 @@
-// import RegisterTrip from "./pages/travel-registration/RegisterTrip";
-
-// function App() {
-//   return (
-//     <div>
-//       <RegisterTrip />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RegisterTrip from "./pages/travel-registration/RegisterTrip"; // یا مسیر مناسب
 import AccountingManagement from "./pages/accounting-management/AccountingManagement"; // صفحه مدیریت حسابداری

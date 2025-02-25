@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@import "@fontsource/vazirmatn";  /* وارد کردن فونت Vazirmatn */
+
+body {
+  font-family: 'Vazirmatn', sans-serif;  /* استفاده از فونت Vazirmatn برای کل پروژه */
+}
