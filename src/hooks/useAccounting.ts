@@ -6,6 +6,9 @@ export const useAccounting = () => {
   const { tripId } = useParams<{ tripId: string }>();
   const [trip, setTrip] = useState<Trip | null>(null);
   const [passengerName, setPassengerName] = useState("");
+  const [dateArrival, setDateArrival] = useState("");
+  const [numberFamilyMembers, setNumberFamilyMembers] = useState("");
+  const [depositGeneralBudget, setDepositGeneralBudget] = useState("");
   const [passengers, setPassengers] = useState<Passenger[]>([]);
 
   // دریافت اطلاعات سفر
@@ -26,8 +29,15 @@ export const useAccounting = () => {
 
   // ثبت مسافر جدید
   const handleRegisterPassenger = () => {
-    if (passengerName) {
-      const newPassenger: Passenger = { name: passengerName, tripId: tripId! };
+    if (passengerName && dateArrival && numberFamilyMembers && depositGeneralBudget) {
+      const newPassenger: Passenger = {
+        id: new Date().getTime().toString(), // می‌توانید از UUID هم استفاده کنید
+        name: passengerName,
+        tripId: tripId!,
+        dateArrival,
+        numberFamilyMembers,
+        depositGeneralBudget,
+      };
 
       fetch('http://localhost:5000/passengers', {
         method: 'POST',
@@ -38,8 +48,13 @@ export const useAccounting = () => {
         .then((data) => {
           setPassengers((prev) => [...prev, data]);
           setPassengerName("");
+          setDateArrival("");
+          setNumberFamilyMembers("");
+          setDepositGeneralBudget("");
         })
         .catch((error) => console.error('Error:', error));
+    } else {
+      alert("لطفاً تمام فیلدها را پر کنید.");
     }
   };
 
@@ -47,6 +62,12 @@ export const useAccounting = () => {
     trip,
     passengerName,
     setPassengerName,
+    dateArrival,
+    setDateArrival,
+    numberFamilyMembers,
+    setNumberFamilyMembers,
+    depositGeneralBudget,
+    setDepositGeneralBudget,
     passengers,
     handleRegisterPassenger,
   };
