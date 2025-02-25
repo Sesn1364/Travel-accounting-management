@@ -30,7 +30,8 @@ const RegisterTrip: React.FC = () => {
               <InputField label="تاریخ سفر" type="date" value={tripDate} onChange={(e) => setTripDate(e.target.value)} width="w-1/3"/>
 
               {/* پیام خطا در صورت خالی بودن فیلدها */}
-              {error && <p className="text-red-500">{error}</p>}
+              {/* {error && <p className="text-red-500">{error}</p>} */}
+              {error && <p className="text-red-500 text-center">{error}</p>}
 
               {/* دکمه ثبت سفر */}
               <Button label="ثبت سفر" onClick={handleRegisterTrip} backgroundColor="bg-green-400" hoverColor="hover:bg-green-700"/>

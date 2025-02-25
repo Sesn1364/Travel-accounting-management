@@ -23,14 +23,22 @@ export const useTrips = () => {
       });
   }, [dispatch]);
 
-  // تابع ثبت سفر
+  // // تابع ثبت سفر
   const handleRegisterTrip = () => {
     if (!tripName || !tripDate) {
       setError("نام و تاریخ سفر را مشخص کنید");
       return;
     }
-    setError(null);
-
+  
+    // بررسی وجود سفر تکراری
+    const isDuplicate = trips.some(trip => trip.name === tripName && trip.date === tripDate);
+    if (isDuplicate) {
+      setError("این سفر قبلاً ثبت شده است.");
+      return;
+    }
+  
+    setError(null); // پاک کردن خطای قبلی
+  
     // ارسال داده جدید به API
     axios.post("http://localhost:5000/trips", { name: tripName, date: tripDate })
       .then(response => {
@@ -40,8 +48,20 @@ export const useTrips = () => {
       })
       .catch(error => {
         console.error("خطا در ثبت سفر:", error);
+        setError("مشکلی در ثبت سفر به وجود آمد.");
       });
   };
+
+  // حذف خودکار پیام خطا بعد از ۳ ثانیه
+useEffect(() => {
+  if (error) {
+    const timer = setTimeout(() => {
+      setError(null);
+    }, 3000);
+    return () => clearTimeout(timer); // پاک کردن تایمر هنگام تغییر کامپوننت
+  }
+}, [error]);
+  
 
 const handleDeleteTrip = (tripId: number) => {
     axios.get("http://localhost:5000/passengers") // دریافت لیست مسافران
