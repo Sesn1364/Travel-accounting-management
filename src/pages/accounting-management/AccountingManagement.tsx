@@ -10,8 +10,12 @@ const AccountingManagement: React.FC = () => {
   
   const { selectedTraveler, setSelectedTraveler, confirmDelete, cancelDelete } = useDeleteTravelerPopup(deletePassenger);
 
+  // گرفتن تاریخ بروز با فرمت مناسب
+  const currentDate = new Date().toLocaleDateString();
+
   return (
     <div className="p-4">
+      <p className="text-black text-right text-sm mb-4">{currentDate}</p>
       <h1 className="text-2xl font-bold mb-4 text-center">مدیریت حسابداری</h1>
 
       {trip ? (
