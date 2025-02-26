@@ -19,10 +19,15 @@ export const useAccounting = () => {
   const [expenseAmount, setExpenseAmount] = useState("");
 
   // 📌 محاسبه totalDeposit از مجموع سپرده‌های مسافران
+  // const totalDeposit = passengers.reduce(
+  //   (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
+  //   0
+  // );
+  const totalExpenses = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
   const totalDeposit = passengers.reduce(
     (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
     0
-  );
+  ) - totalExpenses;
 
   // دریافت اطلاعات سفر
   useEffect(() => {
@@ -170,7 +175,6 @@ export const useAccounting = () => {
       .catch((error) => console.error("Error deleting expense:", error));
   };
   
-  const totalExpenses = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
 
   return {
     trip,
@@ -194,6 +198,7 @@ export const useAccounting = () => {
     setExpenseAmount,
     setExpenses,
     totalExpenses,
+    totalDeposit,
     handleDeleteExpense,
     handleRegisterExpense, // ✅ ثبت هزینه
   };

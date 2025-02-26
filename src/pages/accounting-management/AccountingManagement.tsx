@@ -45,10 +45,16 @@ const AccountingManagement: React.FC = () => {
     (acc, passenger) => acc + parseInt(passenger.numberFamilyMembers),
     0
   );
+  // const totalDeposit = passengers.reduce(
+  //   (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget),
+  //   0
+  // );
+
   const totalDeposit = passengers.reduce(
-    (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget),
+    (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
     0
-  );
+  ) - totalExpenses;
+  
 
   const formattedExpenses = expenses.map(expense => ({
     ...expense,
