@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Trip, Passenger, Expense, UseAccountingReturn } from "../types/Accounting/accountingTypes";
+import { Trip, Passenger, Expense } from "../types/Accounting/accountingTypes";
 
-export const useAccounting = (): UseAccountingReturn => {
+export const useAccounting = () => {
   const { tripId } = useParams<{ tripId: string }>();
   const [trip, setTrip] = useState<Trip | null>(null);
-  const [passengerName, setPassengerName] = useState<string>("");
-  const [dateArrival, setDateArrival] = useState<string>("");
-  const [numberFamilyMembers, setNumberFamilyMembers] = useState<string>("");
-  const [depositGeneralBudget, setDepositGeneralBudget] = useState<string>("");
+  const [passengerName, setPassengerName] = useState("");
+  const [dateArrival, setDateArrival] = useState("");
+  const [numberFamilyMembers, setNumberFamilyMembers] = useState("");
+  const [depositGeneralBudget, setDepositGeneralBudget] = useState("");
   const [passengers, setPassengers] = useState<Passenger[]>([]);
+  
+  
+  // استیت‌های مربوط به هزینه‌ها
   const [expenses, setExpenses] = useState<Expense[]>([]);
-  const [expenseType, setExpenseType] = useState<string>("");
-  const [expenseDate, setExpenseDate] = useState<string>("");
-  const [expenseAmount, setExpenseAmount] = useState<string>("");
+  const [expenseType, setExpenseType] = useState("");
+  const [expenseDate, setExpenseDate] = useState("");
+  const [expenseAmount, setExpenseAmount] = useState("");
 
+  // دریافت اطلاعات سفر
   useEffect(() => {
     fetch(`http://localhost:5000/trips/${tripId}`)
       .then((response) => response.json())
@@ -22,6 +26,7 @@ export const useAccounting = (): UseAccountingReturn => {
       .catch((error) => console.error("Error fetching trip:", error));
   }, [tripId]);
 
+  // دریافت مسافران مربوط به این سفر
   useEffect(() => {
     fetch(`http://localhost:5000/passengers?tripId=${tripId}`)
       .then((response) => response.json())
@@ -29,6 +34,7 @@ export const useAccounting = (): UseAccountingReturn => {
       .catch((error) => console.error("Error fetching passengers:", error));
   }, [tripId]);
 
+  // دریافت لیست هزینه‌های ثبت‌شده
   useEffect(() => {
     fetch(`http://localhost:5000/expenses?tripId=${tripId}`)
       .then((response) => response.json())
@@ -41,20 +47,21 @@ export const useAccounting = (): UseAccountingReturn => {
       alert("لطفاً تمام فیلدها را پر کنید.");
       return;
     }
-
-    const today = new Date().toISOString().split("T")[0];
-
-    if (dateArrival < today) {
+  
+    const today = new Date();
+    const formattedToday = today.toISOString().split("T")[0];
+  
+    if (dateArrival < formattedToday) {
       alert("تاریخ ورود به سفر معتبر نیست.");
       return;
     }
-
+  
     const isDuplicate = passengers.some((passenger) => passenger.name === passengerName);
     if (isDuplicate) {
       alert("این مسافر قبلاً ثبت شده است.");
       return;
     }
-
+  
     const newPassenger: Passenger = {
       id: new Date().getTime().toString(),
       name: passengerName,
@@ -63,7 +70,7 @@ export const useAccounting = (): UseAccountingReturn => {
       numberFamilyMembers,
       depositGeneralBudget,
     };
-
+  
     fetch("http://localhost:5000/passengers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -79,7 +86,9 @@ export const useAccounting = (): UseAccountingReturn => {
       })
       .catch((error) => console.error("Error:", error));
   };
+  
 
+  // تابع ثبت هزینه
   const handleRegisterExpense = () => {
     if (!expenseType || !expenseDate || !expenseAmount) {
       alert("لطفاً تمام فیلدهای هزینه را پر کنید.");
@@ -87,13 +96,14 @@ export const useAccounting = (): UseAccountingReturn => {
     }
 
     const newExpense: Expense = {
-      id: new Date().getTime().toString(),
+      id: new Date().getTime().toString(), // شماره ردیف یکتا
       tripId: tripId!,
       type: expenseType,
       date: expenseDate,
       amount: expenseAmount,
     };
 
+    // ذخیره در db.json
     fetch("http://localhost:5000/expenses", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -101,7 +111,7 @@ export const useAccounting = (): UseAccountingReturn => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setExpenses((prev) => [...prev, data]);
+        setExpenses((prev) => [...prev, data]); // افزودن به لیست هزینه‌ها
         setExpenseType("");
         setExpenseDate("");
         setExpenseAmount("");
@@ -119,6 +129,18 @@ export const useAccounting = (): UseAccountingReturn => {
       .catch((error) => console.error("Error:", error));
   };
 
+  const handleDeleteExpense = (id: string) => {
+    fetch(`http://localhost:5000/expenses/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setExpenses((prev) => prev.filter((expense) => expense.id !== id)); // حذف از استیت
+      })
+      .catch((error) => console.error("Error deleting expense:", error));
+  };
+  
+  
+
   return {
     trip,
     passengerName,
@@ -132,13 +154,15 @@ export const useAccounting = (): UseAccountingReturn => {
     passengers,
     handleRegisterPassenger,
     handleDeletePassenger,
-    expenses,
+    expenses, // ✅ لیست هزینه‌ها
     expenseType,
     setExpenseType,
     expenseDate,
     setExpenseDate,
     expenseAmount,
     setExpenseAmount,
-    handleRegisterExpense,
+    setExpenses,
+    handleDeleteExpense,
+    handleRegisterExpense, // ✅ ثبت هزینه
   };
 };
