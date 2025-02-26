@@ -157,7 +157,7 @@ export const useAccounting = () => {
       .catch((error) => console.error("Error deleting expense:", error));
   };
   
-  
+  const totalExpenses = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
 
   return {
     trip,
@@ -180,6 +180,7 @@ export const useAccounting = () => {
     expenseAmount,
     setExpenseAmount,
     setExpenses,
+    totalExpenses,
     handleDeleteExpense,
     handleRegisterExpense, // ✅ ثبت هزینه
   };

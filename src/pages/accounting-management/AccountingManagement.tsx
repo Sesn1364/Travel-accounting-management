@@ -7,6 +7,7 @@ import SummaryTable from "../../components/summary-table/SummaryTable";
 import PassengerForm from "../../components/passenger-form/PassengerForm";
 import ExpenseForm from "../../components/expense-form/ExpenseForm";
 import ExpenseTable from "../../components/expense-table/ExpenseTable";
+import SummaryTableExpense from "../../components/summary-table-expense/SummaryTableExpense"
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -30,6 +31,7 @@ const AccountingManagement: React.FC = () => {
     setExpenseAmount,
     handleRegisterExpense,
     expenses,
+    totalExpenses,
     handleDeleteExpense, // ✅ استفاده از تابع حذف هزینه از `useAccounting.ts`
   } = useAccounting();
 
@@ -112,13 +114,24 @@ const AccountingManagement: React.FC = () => {
             />
 
             {/* جدول هزینه‌ها */}
-            {expenses.length > 0 && (
+            {/* {expenses.length > 0 && (
              <ExpenseTable
              expenses={formattedExpenses} // ارسال آرایه‌ی اصلاح‌شده
              setSelectedExpense={setSelectedExpense}
              handleDeleteExpense={handleDeleteExpense}
            />
-            )}
+            )} */}
+            {expenses.length > 0 && (
+  <>
+    <ExpenseTable
+      expenses={formattedExpenses} 
+      setSelectedExpense={setSelectedExpense}
+      handleDeleteExpense={handleDeleteExpense}
+    />
+    {/* 📌 اضافه کردن SummaryTableExpense بعد از ExpenseTable */}
+    <SummaryTableExpense totalExpenses={totalExpenses} />
+  </>
+)}
           </div>
 
           {selectedExpense && (
