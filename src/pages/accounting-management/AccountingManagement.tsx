@@ -6,6 +6,9 @@ import Button from "../../components/button/Button";
 import Popup from "../../components/popup/Popup";
 import PassengerTable from "../../components/passenger-table/PassengerTable";
 import SummaryTable from "../../components/summary-table/SummaryTable";
+import PassengerForm from "../../components/passenger-form/PassengerForm";
+import ExpenseForm from "../../components/expense-form/ExpenseForm";
+import ExpenseTable from "../../components/expense-table/ExpenseTable";
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -58,42 +61,17 @@ const AccountingManagement: React.FC = () => {
             </h3>
           </div>
 
-          <div className="flex gap-2 mb-4">
-            <InputField
-              label="نام مسافر"
-              type="text"
-              value={passengerName}
-              onChange={(e) => setPassengerName(e.target.value)}
-              textColor="text-black"
-            />
-            <InputField
-              label="تاریخ ورود به سفر"
-              type="date"
-              value={dateArrival}
-              onChange={(e) => setDateArrival(e.target.value)}
-              textColor="text-black"
-            />
-            <InputField
-              label="تعداد خانواده"
-              type="number"
-              value={numberFamilyMembers}
-              onChange={(e) => setNumberFamilyMembers(e.target.value)}
-              textColor="text-black"
-            />
-            <InputField
-              label="واریزی به بودجه کل"
-              type="number"
-              value={depositGeneralBudget}
-              onChange={(e) => setDepositGeneralBudget(e.target.value)}
-              textColor="text-black"
-            />
-            <Button
-              label="ثبت مسافر"
-              onClick={handleRegisterPassenger}
-              backgroundColor="bg-green-400"
-              hoverColor="hover:bg-green-700"
-            />
-          </div>
+          <PassengerForm
+            passengerName={passengerName}
+            dateArrival={dateArrival}
+            numberFamilyMembers={numberFamilyMembers}
+            depositGeneralBudget={depositGeneralBudget}
+            setPassengerName={setPassengerName}
+            setDateArrival={setDateArrival}
+            setNumberFamilyMembers={setNumberFamilyMembers}
+            setDepositGeneralBudget={setDepositGeneralBudget}
+            handleRegisterPassenger={handleRegisterPassenger}
+          />
 
           <h3 className="text-lg font-semibold mb-2">🧳 مسافران:</h3>
           <PassengerTable
@@ -117,38 +95,19 @@ const AccountingManagement: React.FC = () => {
           {/* بخش هزینه‌ها */}
           <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">💰 هزینه‌ها</h2>
-            <div className="flex gap-2 mb-4">
-              <InputField
-                label="نوع هزینه"
-                type="text"
-                value={expenseType}
-                onChange={(e) => setExpenseType(e.target.value)}
-                textColor="text-black"
-              />
-              <InputField
-                label="تاریخ هزینه"
-                type="date"
-                value={expenseDate}
-                onChange={(e) => setExpenseDate(e.target.value)}
-                textColor="text-black"
-              />
-              <InputField
-                label="مبلغ هزینه"
-                type="number"
-                value={expenseAmount}
-                onChange={(e) => setExpenseAmount(e.target.value)}
-                textColor="text-black"
-              />
-              <Button
-                label="ثبت هزینه"
-                onClick={handleRegisterExpense}
-                backgroundColor="bg-blue-500"
-                hoverColor="hover:bg-blue-700"
-              />
-            </div>
+            <ExpenseForm
+              expenseType={expenseType}
+              setExpenseType={setExpenseType}
+              expenseDate={expenseDate}
+              setExpenseDate={setExpenseDate}
+              expenseAmount={expenseAmount}
+              setExpenseAmount={setExpenseAmount}
+              handleRegisterExpense={handleRegisterExpense}
+            />
 
             {/* جدول هزینه‌ها */}
-            {expenses.length > 0 && (
+            {expenses.length > 0 && <ExpenseTable expenses={expenses} />}
+            {/* {expenses.length > 0 && (
               <table className="w-full border-collapse border border-gray-300">
                 <thead>
                   <tr className="bg-gray-200">
@@ -169,7 +128,7 @@ const AccountingManagement: React.FC = () => {
                   ))}
                 </tbody>
               </table>
-            )}
+            )} */}
           </div>
         </div>
       ) : (
