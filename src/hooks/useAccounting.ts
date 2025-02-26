@@ -18,6 +18,12 @@ export const useAccounting = () => {
   const [expenseDate, setExpenseDate] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
 
+  // 📌 محاسبه totalDeposit از مجموع سپرده‌های مسافران
+  const totalDeposit = passengers.reduce(
+    (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
+    0
+  );
+
   // دریافت اطلاعات سفر
   useEffect(() => {
     fetch(`http://localhost:5000/trips/${tripId}`)
@@ -99,7 +105,7 @@ export const useAccounting = () => {
       alert("لطفاً تمام فیلدهای هزینه را پر کنید.");
       return;
     }
-
+  
     const today = new Date();
     const formattedToday = today.toISOString().split("T")[0];
   
@@ -107,12 +113,18 @@ export const useAccounting = () => {
       alert("تاریخ ثبت هزینه معتبر نیست.");
       return;
     }
-
+  
     if (Number(expenseAmount) <= 0) {
       alert("مبلغ هزینه نباید منفی یا 0 باشد.");
       return;
     }
-
+  
+    // ✨ بررسی اینکه مقدار هزینه از بودجه کل بیشتر نباشد
+    if (Number(expenseAmount) > totalDeposit) {
+      alert("مقدار هزینه از بودجه ی کل بیشتر است");
+      return; // ⛔ جلوی ثبت هزینه گرفته می‌شود
+    }
+  
     const newExpense: Expense = {
       id: new Date().getTime().toString(), // شماره ردیف یکتا
       tripId: tripId!,
@@ -120,7 +132,7 @@ export const useAccounting = () => {
       date: expenseDate,
       amount: expenseAmount,
     };
-
+  
     // ذخیره در db.json
     fetch("http://localhost:5000/expenses", {
       method: "POST",
@@ -136,6 +148,7 @@ export const useAccounting = () => {
       })
       .catch((error) => console.error("Error:", error));
   };
+  
 
   const handleDeletePassenger = (id: string) => {
     fetch(`http://localhost:5000/passengers/${id}`, {

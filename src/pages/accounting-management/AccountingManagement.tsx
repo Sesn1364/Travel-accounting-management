@@ -114,24 +114,17 @@ const AccountingManagement: React.FC = () => {
             />
 
             {/* جدول هزینه‌ها */}
-            {/* {expenses.length > 0 && (
-             <ExpenseTable
-             expenses={formattedExpenses} // ارسال آرایه‌ی اصلاح‌شده
-             setSelectedExpense={setSelectedExpense}
-             handleDeleteExpense={handleDeleteExpense}
-           />
-            )} */}
             {expenses.length > 0 && (
-  <>
-    <ExpenseTable
-      expenses={formattedExpenses} 
-      setSelectedExpense={setSelectedExpense}
-      handleDeleteExpense={handleDeleteExpense}
-    />
-    {/* 📌 اضافه کردن SummaryTableExpense بعد از ExpenseTable */}
-    <SummaryTableExpense totalExpenses={totalExpenses} />
-  </>
-)}
+              <>
+                <ExpenseTable
+                  expenses={formattedExpenses} 
+                  setSelectedExpense={setSelectedExpense}
+                  handleDeleteExpense={handleDeleteExpense}
+                />
+                {/* 📌 اضافه کردن SummaryTableExpense بعد از ExpenseTable */}
+                <SummaryTableExpense totalExpenses={totalExpenses} />
+              </>
+            )}
           </div>
 
           {selectedExpense && (

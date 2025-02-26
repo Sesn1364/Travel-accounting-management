@@ -1,49 +1,40 @@
 {
   "trips": [
     {
-      "id": "9a90",
+      "id": "5fb4",
       "name": "تهران",
-      "date": "2025-02-27"
+      "date": "2025-02-26"
+    },
+    {
+      "id": "8ae0",
+      "name": "رشت",
+      "date": "2025-02-26"
     }
   ],
   "passengers": [
     {
-      "id": "1740572466898",
-      "name": "یسش",
-      "tripId": "9a90",
+      "id": "1740589323107",
+      "name": "ساناز",
+      "tripId": "5fb4",
       "dateArrival": "2025-02-26",
-      "numberFamilyMembers": "1",
-      "depositGeneralBudget": "0"
+      "numberFamilyMembers": "7",
+      "depositGeneralBudget": "500"
     }
   ],
   "expenses": [
     {
-      "id": "1740571869938",
-      "tripId": "9a90",
-      "type": "یبیسب",
+      "id": "1740589374027",
+      "tripId": "5fb4",
+      "type": "ناهار",
       "date": "2025-02-26",
-      "amount": "3"
+      "amount": "600"
     },
     {
-      "id": "1740572161698",
-      "tripId": "9a90",
-      "type": "یبثب",
-      "date": "2025-02-27",
-      "amount": "0"
-    },
-    {
-      "id": "1740572307890",
-      "tripId": "9a90",
-      "type": "لببببسی",
+      "id": "1740590451739",
+      "tripId": "5fb4",
+      "type": "سبزی",
       "date": "2025-02-26",
-      "amount": "3"
-    },
-    {
-      "id": "1740576235515",
-      "tripId": "9a90",
-      "type": "sdasd",
-      "date": "2025-02-26",
-      "amount": "15"
+      "amount": "500"
     }
   ]
 }
