@@ -19,10 +19,6 @@ export const useAccounting = () => {
   const [expenseAmount, setExpenseAmount] = useState("");
 
   // 📌 محاسبه totalDeposit از مجموع سپرده‌های مسافران
-  // const totalDeposit = passengers.reduce(
-  //   (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
-  //   0
-  // );
   const totalExpenses = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
   const totalDeposit = passengers.reduce(
     (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
@@ -59,10 +55,12 @@ export const useAccounting = () => {
       return;
     }
   
-    const today = new Date();
-    const formattedToday = today.toISOString().split("T")[0];
-  
-    if (dateArrival < formattedToday) {
+   const today = new Date();
+    today.setHours(0, 0, 0, 0); // حذف ساعت، دقیقه و ثانیه برای مقایسه صحیح
+    
+    const dateArrivalFormatted = new Date(dateArrival + "T00:00:00"); // تبدیل ورودی به تاریخ معتبر
+    
+    if (dateArrivalFormatted < today) {
       alert("تاریخ ورود به سفر معتبر نیست.");
       return;
     }
@@ -112,12 +110,14 @@ export const useAccounting = () => {
     }
   
     const today = new Date();
-    const formattedToday = today.toISOString().split("T")[0];
-  
-    if (expenseDate < formattedToday) {
-      alert("تاریخ ثبت هزینه معتبر نیست.");
-      return;
-    }
+today.setHours(0, 0, 0, 0); // تنظیم زمان روی 00:00:00 برای حذف ساعت و مقایسه‌ی صحیح
+
+const expenseDateFormatted = new Date(expenseDate + "T00:00:00"); // تبدیل ورودی به تاریخ معتبر
+
+if (expenseDateFormatted < today) {
+  alert("تاریخ ثبت هزینه معتبر نیست.");
+  return;
+}
   
     if (Number(expenseAmount) <= 0) {
       alert("مبلغ هزینه نباید منفی یا 0 باشد.");

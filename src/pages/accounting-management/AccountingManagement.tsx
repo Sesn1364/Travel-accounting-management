@@ -7,7 +7,8 @@ import SummaryTable from "../../components/summary-table/SummaryTable";
 import PassengerForm from "../../components/passenger-form/PassengerForm";
 import ExpenseForm from "../../components/expense-form/ExpenseForm";
 import ExpenseTable from "../../components/expense-table/ExpenseTable";
-import SummaryTableExpense from "../../components/summary-table-expense/SummaryTableExpense"
+import SummaryTableExpense from "../../components/summary-table-expense/SummaryTableExpense";
+import ShareTable from "../../components/share-table/ShareTable"; // 📌 اضافه شد
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -32,33 +33,29 @@ const AccountingManagement: React.FC = () => {
     handleRegisterExpense,
     expenses,
     totalExpenses,
-    handleDeleteExpense, // ✅ استفاده از تابع حذف هزینه از `useAccounting.ts`
+    handleDeleteExpense,
   } = useAccounting();
 
   const { selectedTraveler, setSelectedTraveler, confirmDelete, cancelDelete } =
     useDeleteTravelerPopup(deletePassenger);
 
-  const [selectedExpense, setSelectedExpense] = useState<string | null>(null); // مدیریت حذف هزینه
+  const [selectedExpense, setSelectedExpense] = useState<string | null>(null);
 
   const currentDate = new Date().toLocaleDateString();
   const totalFamilyMembers = passengers.reduce(
     (acc, passenger) => acc + parseInt(passenger.numberFamilyMembers),
     0
   );
-  // const totalDeposit = passengers.reduce(
-  //   (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget),
-  //   0
-  // );
 
-  const totalDeposit = passengers.reduce(
-    (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
-    0
-  ) - totalExpenses;
-  
+  const totalDeposit =
+    passengers.reduce(
+      (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
+      0
+    ) - totalExpenses;
 
   const formattedExpenses = expenses.map(expense => ({
     ...expense,
-    amount: Number(expense.amount), // تبدیل مقدار amount به عدد
+    amount: Number(expense.amount),
   }));
 
   return (
@@ -70,9 +67,7 @@ const AccountingManagement: React.FC = () => {
         <div>
           <div className="bg-gray-100 p-4 rounded-lg shadow-md flex justify-between items-center mb-6">
             <h2 className="text-lg font-semibold">🛫 نام سفر: {trip.name}</h2>
-            <h3 className="text-lg font-medium text-gray-700">
-              📅 تاریخ سفر: {trip.date}
-            </h3>
+            <h3 className="text-lg font-medium text-gray-700">📅 تاریخ سفر: {trip.date}</h3>
           </div>
 
           <PassengerForm
@@ -88,15 +83,9 @@ const AccountingManagement: React.FC = () => {
           />
 
           <h3 className="text-lg font-semibold mb-2">🧳 مسافران:</h3>
-          <PassengerTable
-            passengers={passengers}
-            setSelectedTraveler={setSelectedTraveler}
-          />
+          <PassengerTable passengers={passengers} setSelectedTraveler={setSelectedTraveler} />
 
-          <SummaryTable
-            totalFamilyMembers={totalFamilyMembers}
-            totalDeposit={totalDeposit}
-          />
+          <SummaryTable totalFamilyMembers={totalFamilyMembers} totalDeposit={totalDeposit} />
 
           {selectedTraveler && (
             <Popup
@@ -106,7 +95,6 @@ const AccountingManagement: React.FC = () => {
             />
           )}
 
-          {/* بخش هزینه‌ها */}
           <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">💰 هزینه‌ها</h2>
             <ExpenseForm
@@ -119,30 +107,21 @@ const AccountingManagement: React.FC = () => {
               handleRegisterExpense={handleRegisterExpense}
             />
 
-            {/* جدول هزینه‌ها */}
             {expenses.length > 0 && (
               <>
                 <ExpenseTable
-                  expenses={formattedExpenses} 
+                  expenses={formattedExpenses}
                   setSelectedExpense={setSelectedExpense}
                   handleDeleteExpense={handleDeleteExpense}
                 />
-                {/* 📌 اضافه کردن SummaryTableExpense بعد از ExpenseTable */}
                 <SummaryTableExpense totalExpenses={totalExpenses} />
               </>
             )}
           </div>
 
-          {selectedExpense && (
-            <Popup
-              message="آیا مطمئن هستید که می‌خواهید این هزینه را حذف کنید؟"
-              onConfirm={() => {
-                handleDeleteExpense(selectedExpense);
-                setSelectedExpense(null);
-              }}
-              onCancel={() => setSelectedExpense(null)}
-            />
-          )}
+          {/* 📌 این بخش حالا درون `ShareTable` قرار گرفته */}
+          <ShareTable passengers={passengers} expenses={expenses} />
+
         </div>
       ) : (
         <p className="text-gray-600 text-center">⏳ در حال بارگذاری...</p>
@@ -152,4 +131,3 @@ const AccountingManagement: React.FC = () => {
 };
 
 export default AccountingManagement;
-

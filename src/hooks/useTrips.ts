@@ -23,9 +23,6 @@ export const useTrips = () => {
       });
   }, [dispatch]);
 
-  // گرفتن تاریخ امروز
-  const currentDate = new Date().toISOString().split('T')[0]; // فرمت YYYY-MM-DD
-
   // تابع ثبت سفر
   const handleRegisterTrip = () => {
     if (!tripName || !tripDate) {
@@ -34,10 +31,14 @@ export const useTrips = () => {
     }
   
     // بررسی تاریخ گذشته بودن
-    if (tripDate < currentDate) {
-      setError("این تاریخ گذشته است.");
-      return;
-    }
+  const enteredDate = new Date(tripDate + "T00:00:00"); // جلوگیری از مشکل منطقه زمانی
+  const todayDate = new Date();
+  todayDate.setHours(0, 0, 0, 0); // حذف ساعت، دقیقه، ثانیه برای مقایسه درست
+
+  if (enteredDate < todayDate) {
+    setError("این تاریخ گذشته است.");
+    return;
+  }
 
     // بررسی وجود سفر تکراری
     const isDuplicate = trips.some(trip => trip.name === tripName && trip.date === tripDate);
