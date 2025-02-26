@@ -12,4 +12,12 @@ export interface Trip {
     numberFamilyMembers: string; // اضافه کردن فیلد تعداد اعضای خانواده
     depositGeneralBudget: string; // اضافه کردن فیلد واریزی به بودجه کل
   }
+
+  export interface Expense {
+    id: string;
+    tripId: string;
+    type: string;
+    date: string;
+    amount: string;
+  }
   

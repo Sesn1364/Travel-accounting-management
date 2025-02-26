@@ -1,4 +1,36 @@
 {
-  "trips": [],
-  "passengers": []
+  "trips": [
+    {
+      "id": "490d",
+      "name": "رشت",
+      "date": "2025-02-26"
+    }
+  ],
+  "passengers": [
+    {
+      "id": "1740552763741",
+      "name": "سعید",
+      "tripId": "490d",
+      "dateArrival": "2025-02-26",
+      "numberFamilyMembers": "2",
+      "depositGeneralBudget": "200"
+    },
+    {
+      "id": "1740552778461",
+      "name": "علی",
+      "tripId": "490d",
+      "dateArrival": "2025-02-27",
+      "numberFamilyMembers": "3",
+      "depositGeneralBudget": "20"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "1740552812621",
+      "tripId": "490d",
+      "type": "صبحانه",
+      "date": "2025-02-10",
+      "amount": "200"
+    }
+  ]
 }
