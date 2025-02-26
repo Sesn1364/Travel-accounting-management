@@ -1,8 +1,6 @@
 import React from "react";
 import { useAccounting } from "../../hooks/useAccounting";
 import { useDeleteTravelerPopup } from "../../hooks/useDeleteTravelerPopup";
-import InputField from "../../components/field/InputField";
-import Button from "../../components/button/Button";
 import Popup from "../../components/popup/Popup";
 import PassengerTable from "../../components/passenger-table/PassengerTable";
 import SummaryTable from "../../components/summary-table/SummaryTable";
@@ -107,28 +105,7 @@ const AccountingManagement: React.FC = () => {
 
             {/* جدول هزینه‌ها */}
             {expenses.length > 0 && <ExpenseTable expenses={expenses} />}
-            {/* {expenses.length > 0 && (
-              <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-200">
-                    <th className="border p-2">#</th>
-                    <th className="border p-2">نوع هزینه</th>
-                    <th className="border p-2">تاریخ</th>
-                    <th className="border p-2">مبلغ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {expenses.map((expense, index) => (
-                    <tr key={expense.id} className="text-center">
-                      <td className="border p-2">{index + 1}</td>
-                      <td className="border p-2">{expense.type}</td>
-                      <td className="border p-2">{expense.date}</td>
-                      <td className="border p-2">{expense.amount}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )} */}
+           
           </div>
         </div>
       ) : (

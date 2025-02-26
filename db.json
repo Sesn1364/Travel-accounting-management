@@ -1,36 +1,5 @@
 {
-  "trips": [
-    {
-      "id": "b3e3",
-      "name": "تهران",
-      "date": "2025-02-26"
-    }
-  ],
-  "passengers": [
-    {
-      "id": "1740555423446",
-      "name": "سعید",
-      "tripId": "b3e3",
-      "dateArrival": "2025-02-26",
-      "numberFamilyMembers": "3",
-      "depositGeneralBudget": "1000"
-    },
-    {
-      "id": "1740555446318",
-      "name": "ساناز",
-      "tripId": "b3e3",
-      "dateArrival": "2025-02-26",
-      "numberFamilyMembers": "4",
-      "depositGeneralBudget": "1520"
-    }
-  ],
-  "expenses": [
-    {
-      "id": "1740555481486",
-      "tripId": "b3e3",
-      "type": "ناهار",
-      "date": "2025-02-24",
-      "amount": "200"
-    }
-  ]
+  "trips": [],
+  "passengers": [],
+  "expenses": []
 }
