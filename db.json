@@ -6,6 +6,37 @@
       "date": "2025-02-27"
     }
   ],
-  "passengers": [],
-  "expenses": []
+  "passengers": [
+    {
+      "id": "1740572466898",
+      "name": "یسش",
+      "tripId": "9a90",
+      "dateArrival": "2025-02-26",
+      "numberFamilyMembers": "1",
+      "depositGeneralBudget": "0"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "1740571869938",
+      "tripId": "9a90",
+      "type": "یبیسب",
+      "date": "2025-02-26",
+      "amount": "3"
+    },
+    {
+      "id": "1740572161698",
+      "tripId": "9a90",
+      "type": "یبثب",
+      "date": "2025-02-27",
+      "amount": "0"
+    },
+    {
+      "id": "1740572307890",
+      "tripId": "9a90",
+      "type": "لببببسی",
+      "date": "2025-02-26",
+      "amount": "3"
+    }
+  ]
 }

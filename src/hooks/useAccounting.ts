@@ -55,6 +55,11 @@ export const useAccounting = () => {
       alert("تاریخ ورود به سفر معتبر نیست.");
       return;
     }
+
+    if (Number(depositGeneralBudget) < 0) {
+      alert("مبلغ واریزی به بودجه کل نباید منفی باشد.");
+      return;
+    }
   
     const isDuplicate = passengers.some((passenger) => passenger.name === passengerName);
     if (isDuplicate) {
@@ -92,6 +97,19 @@ export const useAccounting = () => {
   const handleRegisterExpense = () => {
     if (!expenseType || !expenseDate || !expenseAmount) {
       alert("لطفاً تمام فیلدهای هزینه را پر کنید.");
+      return;
+    }
+
+    const today = new Date();
+    const formattedToday = today.toISOString().split("T")[0];
+  
+    if (expenseDate < formattedToday) {
+      alert("تاریخ ثبت هزینه معتبر نیست.");
+      return;
+    }
+
+    if (Number(expenseAmount) <= 0) {
+      alert("مبلغ هزینه نباید منفی یا 0 باشد.");
       return;
     }
 
