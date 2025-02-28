@@ -1,9 +1,6 @@
 import React from "react";
+import {SummaryTableProps} from "../../types/Accounting/accountingTypes"
 
-interface SummaryTableProps {
-  totalFamilyMembers: number;
-  totalDeposit: number;
-}
 
 const SummaryTable: React.FC<SummaryTableProps> = ({ totalFamilyMembers, totalDeposit }) => {
   return (

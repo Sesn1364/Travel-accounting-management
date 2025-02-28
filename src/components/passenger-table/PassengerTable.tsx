@@ -1,12 +1,7 @@
 import React from "react";
-import { Passenger } from "../../types/Accounting/accountingTypes";
 import Button from "../../components/button/Button";
+import {PassengerTableProps} from "../../types/Accounting/accountingTypes"
 
-
-interface PassengerTableProps {
-  passengers: Passenger[];
-  setSelectedTraveler: (id: string | null) => void;
-}
 
 const PassengerTable: React.FC<PassengerTableProps> = ({ passengers, setSelectedTraveler }) => {
   return (

@@ -1,16 +1,7 @@
 import React from "react";
-import InputField from "../field/InputField"; // مسیر صحیح را تنظیم کنید
-import Button from "../button/Button"; // مسیر صحیح را تنظیم کنید
-
-interface ExpenseFormProps {
-  expenseType: string;
-  setExpenseType: (value: string) => void;
-  expenseDate: string;
-  setExpenseDate: (value: string) => void;
-  expenseAmount: string;
-  setExpenseAmount: (value: string) => void;
-  handleRegisterExpense: () => void;
-}
+import InputField from "../field/InputField";
+import Button from "../button/Button";
+import { ExpenseFormProps } from "../../types/Accounting/accountingTypes"; // ایمپورت اینترفیس از types
 
 const ExpenseForm: React.FC<ExpenseFormProps> = ({
   expenseType,

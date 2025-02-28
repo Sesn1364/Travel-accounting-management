@@ -1,18 +1,7 @@
 import React from "react";
 import InputField from "../field/InputField";
 import Button from "../button/Button";
-
-interface PassengerFormProps {
-  passengerName: string;
-  dateArrival: string;
-  numberFamilyMembers: string;
-  depositGeneralBudget: string;
-  setPassengerName: (value: string) => void;
-  setDateArrival: (value: string) => void;
-  setNumberFamilyMembers: (value: string) => void;
-  setDepositGeneralBudget: (value: string) => void;
-  handleRegisterPassenger: () => void;
-}
+import {PassengerFormProps} from "../../types/Accounting/accountingTypes"
 
 const PassengerForm: React.FC<PassengerFormProps> = ({
   passengerName,

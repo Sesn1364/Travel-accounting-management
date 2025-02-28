@@ -203,3 +203,4 @@ if (expenseDateFormatted < today) {
     handleRegisterExpense, // ✅ ثبت هزینه
   };
 };
+

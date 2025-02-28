@@ -44,4 +44,43 @@ export interface Trip {
     handleRegisterExpense: () => void;
   }
   
-  
+  export interface ExpenseFormProps {
+    expenseType: string;
+    setExpenseType: (value: string) => void;
+    expenseDate: string;
+    setExpenseDate: (value: string) => void;
+    expenseAmount: string;
+    setExpenseAmount: (value: string) => void;
+    handleRegisterExpense: () => void;
+  }
+
+  export interface PassengerFormProps {
+    passengerName: string;
+    dateArrival: string;
+    numberFamilyMembers: string;
+    depositGeneralBudget: string;
+    setPassengerName: (value: string) => void;
+    setDateArrival: (value: string) => void;
+    setNumberFamilyMembers: (value: string) => void;
+    setDepositGeneralBudget: (value: string) => void;
+    handleRegisterPassenger: () => void;
+  }
+
+  export interface PassengerTableProps {
+    passengers: Passenger[];
+    setSelectedTraveler: (id: string | null) => void;
+  }
+
+  export interface ShareTableProps {
+    passengers: Passenger[];
+    expenses: Expense[];
+  }
+
+  export interface SummaryTableProps {
+    totalFamilyMembers: number;
+    totalDeposit: number;
+  }
+
+  export interface SummaryTableExpenseProps {
+    totalExpenses: number;
+  }

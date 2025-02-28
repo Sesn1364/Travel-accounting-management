@@ -1,17 +1,5 @@
 import React from "react";
-
-interface Expense {
-  id: string;
-  type: string;
-  date: string;
-  amount: number;
-}
-
-interface ExpenseTableProps {
-  expenses: Expense[];
-  setSelectedExpense: (id: string | null) => void;
-  handleDeleteExpense: (id: string) => void; // اینجا نوع را اصلاح کن
-}
+import { Expense, ExpenseTableProps } from "../../types/Expense-table/expenseTable"; // ایمپورت اینترفیس‌ها از types
 
 const ExpenseTable: React.FC<ExpenseTableProps> = ({ expenses, setSelectedExpense, handleDeleteExpense }) => {
   return (
@@ -33,13 +21,12 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({ expenses, setSelectedExpens
             <td className="border p-2">{expense.date}</td>
             <td className="border p-2">{expense.amount}</td>
             <td className="border p-2">
-            <button
-  onClick={() => handleDeleteExpense(expense.id)} // ارسال id هنگام حذف
-  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
->
-  حذف
-</button>
-
+              <button
+                onClick={() => handleDeleteExpense(expense.id)}
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+              >
+                حذف
+              </button>
             </td>
           </tr>
         ))}
@@ -49,4 +36,3 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({ expenses, setSelectedExpens
 };
 
 export default ExpenseTable;
-

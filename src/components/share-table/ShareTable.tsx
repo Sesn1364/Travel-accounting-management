@@ -1,11 +1,7 @@
 import React from "react";
 import { useShareCalculation } from "../../hooks/useCalculateShare";
-import { Passenger, Expense } from "../../types/Accounting/accountingTypes";
+import {ShareTableProps} from "../../types/Accounting/accountingTypes"
 
-interface ShareTableProps {
-  passengers: Passenger[];
-  expenses: Expense[];
-}
 
 const ShareTable: React.FC<ShareTableProps> = ({ passengers, expenses }) => {
   const calculateShare = useShareCalculation(passengers, expenses);

@@ -1,8 +1,6 @@
 import React from "react";
+import {SummaryTableExpenseProps} from "../../types/Accounting/accountingTypes"
 
-interface SummaryTableExpenseProps {
-  totalExpenses: number;
-}
 
 const SummaryTableExpense: React.FC<SummaryTableExpenseProps> = ({ totalExpenses }) => {
   return (
