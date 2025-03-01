@@ -83,4 +83,6 @@ export interface Trip {
 
   export interface SummaryTableExpenseProps {
     totalExpenses: number;
+    title : string;
+    label : string;
   }

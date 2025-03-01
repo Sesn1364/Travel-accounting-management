@@ -51,6 +51,12 @@ const AccountingManagement: React.FC = () => {
     passengers.reduce(
       (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
       0
+    );
+
+  const remainingBudget =
+    passengers.reduce(
+      (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
+      0
     ) - totalExpenses;
 
   const formattedExpenses = expenses.map(expense => ({
@@ -114,7 +120,8 @@ const AccountingManagement: React.FC = () => {
                   setSelectedExpense={setSelectedExpense}
                   handleDeleteExpense={handleDeleteExpense}
                 />
-                <SummaryTableExpense totalExpenses={totalExpenses} />
+                <SummaryTableExpense totalExpenses={totalExpenses} title="💰 مجموع هزینه ها" label="هزینه کل"/>
+                <SummaryTableExpense totalExpenses={remainingBudget} title="💰 باقیمانده بودجه با کسر هزینه ها" label="بودجه باقی مانده"/>
               </>
             )}
           </div>

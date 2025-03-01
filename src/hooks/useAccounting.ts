@@ -33,7 +33,7 @@ export const useAccounting = () => {
   }, [tripId]);
 
   const totalExpenses = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
-  const totalDeposit =
+  const remainingBudget =
     passengers.reduce((acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"), 0) - totalExpenses;
 
   const handleRegisterPassenger = async () => {
@@ -118,8 +118,8 @@ export const useAccounting = () => {
     return;
   }
 
-    if (Number(expenseAmount) > totalDeposit) {
-      alert("مقدار هزینه از بودجه ی کل بیشتر است");
+    if (Number(expenseAmount) > remainingBudget) {
+      alert("مقدار هزینه از بودجه ی باقی مانده بیشتر است");
       return;
     }
 
@@ -173,7 +173,7 @@ export const useAccounting = () => {
     setExpenseAmount,
     setExpenses,
     totalExpenses,
-    totalDeposit,
+    remainingBudget,
     handleDeleteExpense,
     handleRegisterExpense,
   };
