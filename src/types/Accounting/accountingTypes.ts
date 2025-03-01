@@ -86,3 +86,8 @@ export interface Trip {
     title : string;
     label : string;
   }
+
+  export interface RemainingBudgetTableProps {
+    passengers: Passenger[];
+    expenses: any[]; // نوع دقیق Expense را از فایل types بگیرید
+  }
