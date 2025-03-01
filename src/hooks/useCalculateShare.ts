@@ -23,7 +23,7 @@ export const useShareCalculation = (passengers: Passenger[], expenses: Expense[]
       });
     });
 
-    return totalShare.toFixed(2);
+    return totalShare.toFixed();
   };
 
   return useMemo(() => calculateShare, [passengers, expenses]);

@@ -77,6 +77,7 @@ export interface Trip {
   }
 
   export interface SummaryTableProps {
+    numberSupervisors: number;
     totalFamilyMembers: number;
     totalDeposit: number;
   }

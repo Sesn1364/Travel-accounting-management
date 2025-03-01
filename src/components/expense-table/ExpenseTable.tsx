@@ -19,7 +19,7 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({ expenses, setSelectedExpens
             <td className="border p-2">{index + 1}</td>
             <td className="border p-2">{expense.type}</td>
             <td className="border p-2">{expense.date}</td>
-            <td className="border p-2">{expense.amount}</td>
+            <td className="border p-2">{expense.amount} تومان</td>
             <td className="border p-2">
               <button
                 onClick={() => handleDeleteExpense(expense.id)}

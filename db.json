@@ -27,6 +27,22 @@
       "dateArrival": "2025-03-02",
       "numberFamilyMembers": "3",
       "depositGeneralBudget": "700"
+    },
+    {
+      "id": "1740830231018",
+      "name": "edfadf",
+      "tripId": "937c",
+      "dateArrival": "2025-03-01",
+      "numberFamilyMembers": "2",
+      "depositGeneralBudget": "5"
+    },
+    {
+      "id": "1740830899058",
+      "name": "cfvsdv",
+      "tripId": "937c",
+      "dateArrival": "2025-03-01",
+      "numberFamilyMembers": "1",
+      "depositGeneralBudget": "0"
     }
   ],
   "expenses": [

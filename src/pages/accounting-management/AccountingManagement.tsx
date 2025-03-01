@@ -65,6 +65,8 @@ const AccountingManagement: React.FC = () => {
     amount: Number(expense.amount),
   }));
 
+  const numberSupervisors = passengers.length;
+
   return (
     <div className="p-4">
       <p className="text-black text-right text-sm mb-4">{currentDate}</p>
@@ -92,7 +94,7 @@ const AccountingManagement: React.FC = () => {
           <h3 className="text-lg font-semibold mb-2">🧳 مسافران:</h3>
           <PassengerTable passengers={passengers} setSelectedTraveler={setSelectedTraveler} />
 
-          <SummaryTable totalFamilyMembers={totalFamilyMembers} totalDeposit={totalDeposit} />
+          <SummaryTable numberSupervisors={numberSupervisors} totalFamilyMembers={totalFamilyMembers} totalDeposit={totalDeposit} />
 
           {selectedTraveler && (
             <Popup

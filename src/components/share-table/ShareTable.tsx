@@ -20,7 +20,7 @@ const ShareTable: React.FC<ShareTableProps> = ({ passengers, expenses }) => {
           {passengers.map(passenger => (
             <tr key={passenger.name} className="bg-white">
               <td className="border border-gray-300 px-4 py-2">{passenger.name}</td>
-              <td className="border border-gray-300 px-4 py-2">{calculateShare(passenger.name)}</td>
+              <td className="border border-gray-300 px-4 py-2">{calculateShare(passenger.name)} تومان</td>
             </tr>
           ))}
         </tbody>
