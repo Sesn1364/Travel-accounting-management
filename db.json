@@ -1,51 +1,11 @@
 {
   "trips": [
     {
-      "id": "5e0d",
+      "id": "76b1",
       "name": "رشت",
-      "date": "2025-02-28"
+      "date": "2025-03-01"
     }
   ],
-  "passengers": [
-    {
-      "id": "1740773745215",
-      "name": "سعید",
-      "tripId": "5e0d",
-      "dateArrival": "2025-02-28",
-      "numberFamilyMembers": "2",
-      "depositGeneralBudget": "500"
-    },
-    {
-      "id": "1740773871135",
-      "name": "ببیسب",
-      "tripId": "5e0d",
-      "dateArrival": "2025-03-01",
-      "numberFamilyMembers": "5",
-      "depositGeneralBudget": "700"
-    },
-    {
-      "id": "1740773896935",
-      "name": "برذیبر",
-      "tripId": "5e0d",
-      "dateArrival": "2025-03-01",
-      "numberFamilyMembers": "1",
-      "depositGeneralBudget": "500"
-    }
-  ],
-  "expenses": [
-    {
-      "id": "1740773825127",
-      "tripId": "5e0d",
-      "type": "یس",
-      "date": "2025-02-28",
-      "amount": "200"
-    },
-    {
-      "id": "1740773918423",
-      "tripId": "5e0d",
-      "type": "بسیب",
-      "date": "2025-03-01",
-      "amount": "200"
-    }
-  ]
+  "passengers": [],
+  "expenses": []
 }
