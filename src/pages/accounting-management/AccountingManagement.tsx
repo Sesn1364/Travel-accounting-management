@@ -11,6 +11,7 @@ import SummaryTableExpense from "../../components/summary-table-expense/SummaryT
 import ShareTable from "../../components/share-table/ShareTable"; // 📌 اضافه شد
 import RemainingBudgetTable from "../../components/remaining-budget-table/RemainingBudgetTable"
 import DebtorsTable from "../../components/debtors-table/DebtorsTable"
+import AddBudget from "../../components/add-budget-for-supervisor/AddBudgetForSupervisor"
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -68,6 +69,8 @@ const AccountingManagement: React.FC = () => {
 
   const numberSupervisors = passengers.length;
   const [remainingBudgetCount, setRemainingBudgetCount] = useState(0);
+
+  const setPassengers = () => {};
 
   return (
     <div className="p-4">
@@ -144,6 +147,17 @@ const AccountingManagement: React.FC = () => {
         <RemainingBudgetTable passengers={passengers} expenses={expenses} setRemainingBudgetCount={setRemainingBudgetCount} />
         <DebtorsTable passengers={passengers} expenses={expenses} numberSupervisors={numberSupervisors} remainingBudgetCount={remainingBudgetCount} />
       </div>
+
+      <div>
+      <h1 className="text-xl font-bold mb-4">مدیریت حسابداری</h1>
+      <AddBudget passengers={passengers.map(p => ({ ...p, id: p.id || "" }))} updatePassengers={setPassengers} />
+      <h2 className="text-lg font-bold mt-6">لیست سرپرستان</h2>
+      <ul>
+        {passengers.map((p) => (
+          <li key={p.id}>{p.name}: {p.depositGeneralBudget} تومان</li>
+        ))}
+      </ul>
+    </div>
     </div>
   );
 };

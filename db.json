@@ -1,57 +1,70 @@
 {
   "trips": [
     {
-      "id": "822b",
+      "id": "49e9",
       "name": "تهران",
       "date": "2025-03-02"
     },
     {
-      "id": "1cd9",
+      "id": "84e2",
       "name": "رشت",
       "date": "2025-03-02"
     }
   ],
   "passengers": [
     {
-      "id": "1740890297763",
+      "id": "1740893918651",
       "name": "سعید",
-      "tripId": "1cd9",
+      "tripId": "84e2",
       "dateArrival": "2025-03-02",
       "numberFamilyMembers": "2",
-      "depositGeneralBudget": "500"
+      "depositGeneralBudget": "900"
     },
     {
-      "id": "1740890525763",
+      "id": "1740894016139",
       "name": "علی",
-      "tripId": "1cd9",
+      "tripId": "84e2",
       "dateArrival": "2025-03-03",
       "numberFamilyMembers": "3",
       "depositGeneralBudget": "700"
     },
     {
-      "id": "1740890746499",
+      "id": "1740894158787",
       "name": "ممد",
-      "tripId": "1cd9",
+      "tripId": "84e2",
       "dateArrival": "2025-03-04",
-      "numberFamilyMembers": "2",
-      "depositGeneralBudget": "50"
-    },
-    {
-      "id": "1740891481883",
-      "name": "رضا",
-      "tripId": "1cd9",
-      "dateArrival": "2025-03-05",
       "numberFamilyMembers": "3",
       "depositGeneralBudget": "100"
     }
   ],
   "expenses": [
     {
-      "id": "1740890851763",
-      "tripId": "1cd9",
+      "id": "1740893959211",
+      "tripId": "84e2",
+      "type": "صبحانه",
+      "date": "2025-03-02",
+      "amount": "50"
+    },
+    {
+      "id": "1740894036995",
+      "tripId": "84e2",
+      "type": "ناهار",
+      "date": "2025-03-03",
+      "amount": "150"
+    },
+    {
+      "id": "1740894191827",
+      "tripId": "84e2",
       "type": "شام",
       "date": "2025-03-04",
-      "amount": "210"
+      "amount": "240"
+    },
+    {
+      "id": "1740894251235",
+      "tripId": "84e2",
+      "type": "ناهار",
+      "date": "2025-03-05",
+      "amount": "200"
     }
   ]
 }
