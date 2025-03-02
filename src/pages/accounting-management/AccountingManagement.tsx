@@ -10,6 +10,7 @@ import ExpenseTable from "../../components/expense-table/ExpenseTable";
 import SummaryTableExpense from "../../components/summary-table-expense/SummaryTableExpense";
 import ShareTable from "../../components/share-table/ShareTable"; // 📌 اضافه شد
 import RemainingBudgetTable from "../../components/remaining-budget-table/RemainingBudgetTable"
+import DebtorsTable from "../../components/debtors-table/DebtorsTable"
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -66,6 +67,7 @@ const AccountingManagement: React.FC = () => {
   }));
 
   const numberSupervisors = passengers.length;
+  const [remainingBudgetCount, setRemainingBudgetCount] = useState(0);
 
   return (
     <div className="p-4">
@@ -137,8 +139,11 @@ const AccountingManagement: React.FC = () => {
         <p className="text-gray-600 text-center">⏳ در حال بارگذاری...</p>
       )}
 
-<RemainingBudgetTable passengers={passengers} expenses={expenses} />
-
+      <div>
+        <h1 className="text-2xl font-bold">مدیریت حسابداری</h1>
+        <RemainingBudgetTable passengers={passengers} expenses={expenses} setRemainingBudgetCount={setRemainingBudgetCount} />
+        <DebtorsTable passengers={passengers} expenses={expenses} numberSupervisors={numberSupervisors} remainingBudgetCount={remainingBudgetCount} />
+      </div>
     </div>
   );
 };

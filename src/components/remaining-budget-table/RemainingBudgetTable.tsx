@@ -1,10 +1,24 @@
 import React from "react";
 import { useShareCalculation } from "../../hooks/useCalculateShare";
-import {RemainingBudgetTableProps} from "../../types/Accounting/accountingTypes"
+import { RemainingBudgetTableProps } from "../../types/Accounting/accountingTypes";
 
+interface Props extends RemainingBudgetTableProps {
+  setRemainingBudgetCount: (count: number) => void; // تابع برای ارسال تعداد رکوردهای مثبت
+}
 
-const RemainingBudgetTable: React.FC<RemainingBudgetTableProps> = ({ passengers, expenses }) => {
+const RemainingBudgetTable: React.FC<Props> = ({ passengers, expenses, setRemainingBudgetCount }) => {
   const calculateShare = useShareCalculation(passengers, expenses);
+
+  const positiveRecords = passengers.filter(passenger => {
+    const share = parseFloat(calculateShare(passenger.name));
+    const deposit = parseFloat(passenger.depositGeneralBudget);
+    return deposit - share > 0;
+  });
+
+  // ارسال تعداد رکوردهای مثبت به والد
+  React.useEffect(() => {
+    setRemainingBudgetCount(positiveRecords.length);
+  }, [positiveRecords.length, setRemainingBudgetCount]);
 
   return (
     <div className="mt-6 p-4 bg-green-100 rounded-lg shadow-md">
