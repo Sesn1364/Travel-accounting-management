@@ -44,9 +44,9 @@ export const useAccounting = () => {
 
     const today = new Date();
     today.setHours(0, 0, 0, 0); // حذف ساعت، دقیقه و ثانیه برای مقایسه صحیح
-    
+
     const dateArrivalFormatted = new Date(dateArrival + "T00:00:00"); // تبدیل ورودی به تاریخ معتبر
-    
+
     if (dateArrivalFormatted < today) {
       alert("تاریخ ورود به سفر معتبر نیست.");
       return;
@@ -103,20 +103,26 @@ export const useAccounting = () => {
       alert("لطفاً تمام فیلدهای هزینه را پر کنید.");
       return;
     }
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // تنظیم زمان روی 00:00:00 برای حذف ساعت و مقایسه‌ی صحیح
 
-  const expenseDateFormatted = new Date(expenseDate + "T00:00:00"); // تبدیل ورودی به تاریخ معتبر
+    if (passengers.length === 0) {
+      alert("حداقل یک مسافر باید ثبت شود قبل از اینکه هزینه‌ای اضافه کنید.");
+      return;
+    }
 
-  if (expenseDateFormatted < today) {
-    alert("تاریخ ثبت هزینه معتبر نیست.");
-    return;
-  }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-  if (Number(expenseAmount) <= 0) {
-    alert("هزینه نباید منفی یا 0 باشد.");
-    return;
-  }
+    const expenseDateFormatted = new Date(expenseDate + "T00:00:00");
+
+    if (expenseDateFormatted < today) {
+      alert("تاریخ ثبت هزینه معتبر نیست.");
+      return;
+    }
+
+    if (Number(expenseAmount) <= 0) {
+      alert("هزینه نباید منفی یا 0 باشد.");
+      return;
+    }
 
     if (Number(expenseAmount) > remainingBudget) {
       alert("مقدار هزینه از بودجه ی باقی مانده بیشتر است");
@@ -141,6 +147,7 @@ export const useAccounting = () => {
       console.error("Error:", error);
     }
   };
+
 
   const handleDeleteExpense = async (id: string) => {
     try {

@@ -148,14 +148,7 @@ const AccountingManagement: React.FC = () => {
           </div>
 
           <div>
-            {/* <h1 className="text-xl font-bold mb-4">مدیریت حسابداری</h1> */}
             <AddBudget passengers={passengers.map(p => ({ ...p, id: p.id || "" }))} updatePassengers={setPassengers} />
-            {/* <h2 className="text-lg font-bold mt-6">لیست سرپرستان</h2>
-            <ul>
-              {passengers.map((p) => (
-                <li key={p.id}>{p.name}: {p.depositGeneralBudget} تومان</li>
-              ))}
-            </ul> */}
           </div>
 
         </div>
