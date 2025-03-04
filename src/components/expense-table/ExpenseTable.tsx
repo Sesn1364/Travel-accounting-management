@@ -3,7 +3,7 @@ import { Expense, ExpenseTableProps } from "../../types/Expense-table/expenseTab
 
 const ExpenseTable: React.FC<ExpenseTableProps> = ({ expenses, setSelectedExpense, handleDeleteExpense }) => {
   return (
-    <table className="w-full border-collapse border border-gray-300 mt-4">
+    <table className="w-full border-collapse border border-gray-300 mt-4 mb-20">
       <thead>
         <tr className="bg-gray-200">
           <th className="border p-2">#</th>
@@ -16,11 +16,11 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({ expenses, setSelectedExpens
       <tbody>
         {expenses.map((expense, index) => (
           <tr key={expense.id} className="text-center">
-            <td className="border p-2">{index + 1}</td>
-            <td className="border p-2">{expense.type}</td>
-            <td className="border p-2">{expense.date}</td>
-            <td className="border p-2">{expense.amount} تومان</td>
-            <td className="border p-2">
+            <td className="border p-2 border-white text-white text-xl">{index + 1}</td>
+            <td className="border p-2 border-white text-white text-xl">{expense.type}</td>
+            <td className="border p-2 border-white text-white text-xl">{expense.date}</td>
+            <td className="border p-2 border-white text-white text-xl">{expense.amount} تومان</td>
+            <td className="border p-2 border-white">
               <button
                 onClick={() => handleDeleteExpense(expense.id)}
                 className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"

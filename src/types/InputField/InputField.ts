@@ -6,5 +6,6 @@ export interface InputFieldProps {
     backgroundColor?: string;
     textColor?: string;
     width?: string;
+    className?: string;
   }
   

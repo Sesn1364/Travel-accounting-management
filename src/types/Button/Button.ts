@@ -3,5 +3,6 @@ export interface ButtonProps {
     onClick: () => void;
     backgroundColor?: string;
     hoverColor?: string;
+    className?: string;
   }
   

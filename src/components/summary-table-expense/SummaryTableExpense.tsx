@@ -4,7 +4,7 @@ import {SummaryTableExpenseProps} from "../../types/Accounting/accountingTypes"
 
 const SummaryTableExpense: React.FC<SummaryTableExpenseProps> = ({ totalExpenses , title , label  }) => {
   return (
-    <div className="mt-8 bg-gray-100 p-4 rounded-lg shadow-md">
+    <div className="mt-8 bg-gray-100 p-4 rounded-lg shadow-md ">
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
       <table className="min-w-full table-auto border-collapse bg-white shadow-lg rounded-lg">
         <thead className="bg-gray-200">
