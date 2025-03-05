@@ -1,44 +1,55 @@
 import React from "react";
 import Button from "../../components/button/Button";
-import {PassengerTableProps} from "../../types/Accounting/accountingTypes"
-
+import { PassengerTableProps } from "../../types/Accounting/accountingTypes";
 
 const PassengerTable: React.FC<PassengerTableProps> = ({ passengers, setSelectedTraveler }) => {
   return (
-    <>
-    <h3 className="text-3xl font-semibold mb-2 text-center text-white">پنل مسافران</h3>
-    <div className="overflow-x-auto max-h-48 overflow-y-auto border border-gray-300 rounded-t-lg mb-20">
-      <table className="min-w-full table-auto border-collapse bg-white shadow-lg">
-        <thead className="bg-gray-200 sticky top-0 z-10">
-          <tr>
-            <th className="px-4 py-2 text-lg font-medium text-gray-700 border-b">نام سرپرست</th>
-            <th className="px-4 py-2 text-lg font-medium text-gray-700 border-b">تاریخ ورود به سفر</th>
-            <th className="px-4 py-2 text-lg font-medium text-gray-700 border-b">تعداد اعضای خانواده</th>
-            <th className="px-4 py-2 text-lg font-medium text-gray-700 border-b">واریزی به بودجه کل</th>
-            <th className="px-4 py-2 text-lg font-medium text-gray-700 border-b">عملیات</th>
-          </tr>
-        </thead>
-        <tbody>
-          {passengers.map((passenger) => (
-            <tr key={passenger.id} className="border-b">
-              <td className="px-4 py-2 text-lg text-gray-700 text-center bg-purple-400">{passenger.name}</td>
-              <td className="px-4 py-2 text-lg text-gray-700 text-center bg-linear-to-r from-purple-400 to-purple-300">{passenger.dateArrival}</td>
-              <td className="px-4 py-2 text-lg text-gray-700 text-center bg-linear-to-r from-purple-300 to-purple-200">{passenger.numberFamilyMembers}</td>
-              <td className="px-4 py-2 text-lg text-gray-700 text-center bg-linear-to-r from-purple-200 to-purple-100">{passenger.depositGeneralBudget} تومان</td>
-              <td className="px-4 py-2 text-sm text-gray-700 text-center bg-purple-100">
-                <Button
-                  label="حذف مسافر"
-                  onClick={() => setSelectedTraveler(passenger.id ?? null)}
-                  backgroundColor="bg-red-500"
-                  hoverColor="hover:bg-red-700"
-                />
-              </td>
+    <div className="bg-gray-900 shadow-2xl rounded-3xl p-6 w-full max-w-5xl mx-auto mt-10 border border-gray-800">
+      <h3 className="text-3xl font-bold text-white text-center mb-6">پنل مسافران</h3>
+      <div className="overflow-x-auto max-h-64 overflow-y-auto border border-gray-700 rounded-xl shadow-lg">
+        <table className="min-w-full table-auto border-collapse bg-gray-800 text-white rounded-xl">
+          <thead className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white sticky top-0 z-10">
+            <tr>
+              {[
+                "نام سرپرست",
+                "تاریخ ورود به سفر",
+                "تعداد اعضای خانواده",
+                "واریزی به بودجه کل",
+                "عملیات",
+              ].map((header, index) => (
+                <th key={index} className="px-6 py-3 text-lg font-semibold border-b text-center">
+                  {header}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {passengers.map((passenger, index) => (
+              <tr
+                key={passenger.id}
+                className={
+                  index % 2 === 0
+                    ? "bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600"
+                    : "bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500"
+                }
+              >
+                <td className="px-6 py-4 text-lg text-center font-medium">{passenger.name}</td>
+                <td className="px-6 py-4 text-lg text-center">{passenger.dateArrival}</td>
+                <td className="px-6 py-4 text-lg text-center">{passenger.numberFamilyMembers}</td>
+                <td className="px-6 py-4 text-lg text-center">{passenger.depositGeneralBudget} تومان</td>
+                <td className="px-6 py-4 text-center">
+                  <Button
+                    label="حذف مسافر"
+                    onClick={() => setSelectedTraveler(passenger.id ?? null)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-semibold rounded-xl px-5 py-2 shadow-md transform hover:scale-105 transition-all duration-300"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-    </>
   );
 };
 

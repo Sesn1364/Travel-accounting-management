@@ -1,7 +1,7 @@
 import React from "react";
 import InputField from "../field/InputField";
 import Button from "../button/Button";
-import { ExpenseFormProps } from "../../types/Accounting/accountingTypes"; // ایمپورت اینترفیس از types
+import { ExpenseFormProps } from "../../types/Accounting/accountingTypes";
 
 const ExpenseForm: React.FC<ExpenseFormProps> = ({
   expenseType,
@@ -13,7 +13,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
   handleRegisterExpense,
 }) => {
   return (
-    <div className="flex gap-2 mb-4">
+    <div className="flex gap-2 mb-4 items-end">
       <InputField
         label="نوع هزینه"
         type="text"
@@ -39,8 +39,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
         label="ثبت هزینه"
         onClick={handleRegisterExpense}
         backgroundColor="bg-green-500"
-        hoverColor="hover:bg-blue-700"
-        className="bg-green-500 hover:bg-green-700 text-white font-semibold px-2 rounded-lg transition duration-300 shadow-md"
+        hoverColor="hover:bg-green-700"
+        className="h-full px-4 py-2.5 text-white font-medium bg-green-500 hover:bg-green-700 rounded-md transition duration-300 shadow-sm"
       />
     </div>
   );

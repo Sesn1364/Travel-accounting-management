@@ -4,17 +4,17 @@ import {SummaryTableExpenseProps} from "../../types/Accounting/accountingTypes"
 
 const SummaryTableExpense: React.FC<SummaryTableExpenseProps> = ({ totalExpenses , title , label  }) => {
   return (
-    <div className="mt-8 bg-gray-100 p-4 rounded-lg shadow-md ">
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+    <div className="mt-8 bg-gray-100 p-4 rounded-lg shadow-md w-1/2">
+      <h3 className="text-lg font-semibold mb-2 text-center">{title}</h3>
       <table className="min-w-full table-auto border-collapse bg-white shadow-lg rounded-lg">
         <thead className="bg-gray-200">
           <tr>
-            <th className="px-4 py-2 text-sm font-medium text-gray-700 border-b">{label}</th>
+            <th className="px-4 py-2 text-xl font-medium text-gray-700 border-b">{label}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="px-4 py-2 text-sm text-gray-700">{totalExpenses.toLocaleString()} تومان</td>
+            <td className="px-4 py-2 text-2xl text-gray-700 text-center">{totalExpenses.toLocaleString()} تومان</td>
           </tr>
         </tbody>
       </table>

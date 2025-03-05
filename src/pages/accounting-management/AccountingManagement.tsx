@@ -15,6 +15,7 @@ import AddBudget from "../../components/add-budget-for-supervisor/AddBudgetForSu
 import travelersPhoto from "../../assets/images/jeshoots-com-mSESwdMZr-A-unsplash.jpg"
 import accountingPageBackground from "../../assets/images/raphael-nogueira-svbDI1Pq30s-unsplash.jpg"
 import shoppingBackground from "../../assets/images/maria-lin-kim-8RaUEd8zD-U-unsplash.jpg"
+import supervisorsBackground from "../../assets/images/toa-heftiba-x9I-6yoXrXE-unsplash.jpg"
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -86,65 +87,67 @@ const AccountingManagement: React.FC = () => {
             <h2 className="text-lg font-semibold">🛫 نام سفر: {trip.name}</h2>
             <h3 className="text-lg font-medium text-gray-700">📅 تاریخ سفر: {trip.date}</h3>
           </div>
-          <div className="min-h-40 bg-cover bg-center mb-20 rounded-2xl" style={{ backgroundImage: `url(${travelersPhoto})` }}>
-          <PassengerForm
-            passengerName={passengerName}
-            dateArrival={dateArrival}
-            numberFamilyMembers={numberFamilyMembers}
-            depositGeneralBudget={depositGeneralBudget}
-            setPassengerName={setPassengerName}
-            setDateArrival={setDateArrival}
-            setNumberFamilyMembers={setNumberFamilyMembers}
-            setDepositGeneralBudget={setDepositGeneralBudget}
-            handleRegisterPassenger={handleRegisterPassenger}
-          />
-          </div>
-          
-          <PassengerTable passengers={passengers} setSelectedTraveler={setSelectedTraveler} />
-
-          <SummaryTable numberSupervisors={numberSupervisors} totalFamilyMembers={totalFamilyMembers} totalDeposit={totalDeposit} />
-
-          {selectedTraveler && (
-            <Popup
-              message="آیا مطمئن هستید که می‌خواهید این مسافر را حذف کنید؟"
-              onConfirm={confirmDelete}
-              onCancel={cancelDelete}
-            />
-          )}
-
-          <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center" style={{ backgroundImage: `url(${shoppingBackground})` }}>
-            <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg">
-            <h2 className="text-3xl font-semibold mb-4 text-white">هزینه‌ها</h2>
-            <ExpenseForm
-              expenseType={expenseType}
-              setExpenseType={setExpenseType}
-              expenseDate={expenseDate}
-              setExpenseDate={setExpenseDate}
-              expenseAmount={expenseAmount}
-              setExpenseAmount={setExpenseAmount}
-              handleRegisterExpense={handleRegisterExpense}
-            />
-
-            {expenses.length > 0 && (
-              <>
-                <ExpenseTable
-                  expenses={formattedExpenses}
-                  setSelectedExpense={setSelectedExpense}
-                  handleDeleteExpense={handleDeleteExpense}
+          <div className=" bg-cover bg-center mb-20 rounded-lg mt-6 p-20 shadow-md bg-gray-100" style={{ backgroundImage: `url(${travelersPhoto})` }}>
+            <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg flex flex-col items-center">
+              <PassengerForm
+                passengerName={passengerName}
+                dateArrival={dateArrival}
+                numberFamilyMembers={numberFamilyMembers}
+                depositGeneralBudget={depositGeneralBudget}
+                setPassengerName={setPassengerName}
+                setDateArrival={setDateArrival}
+                setNumberFamilyMembers={setNumberFamilyMembers}
+                setDepositGeneralBudget={setDepositGeneralBudget}
+                handleRegisterPassenger={handleRegisterPassenger}
+              />
+              <PassengerTable passengers={passengers} setSelectedTraveler={setSelectedTraveler} />
+              <SummaryTable numberSupervisors={numberSupervisors} totalFamilyMembers={totalFamilyMembers} totalDeposit={totalDeposit} />
+              {selectedTraveler && (
+                <Popup
+                  message="آیا مطمئن هستید که می‌خواهید این مسافر را حذف کنید؟"
+                  onConfirm={confirmDelete}
+                  onCancel={cancelDelete}
                 />
-                <SummaryTableExpense totalExpenses={totalExpenses} title="💰 مجموع هزینه ها" label="هزینه کل" />
-                <SummaryTableExpense totalExpenses={remainingBudget} title="💰 باقیمانده بودجه با کسر هزینه ها" label="بودجه باقی مانده" />
-              </>
-            )}
+              )}
             </div>
           </div>
 
-          {/* 📌 این بخش حالا درون `ShareTable` قرار گرفته */}
-          <ShareTable passengers={passengers} expenses={expenses} />
-          <div>
-            <h1 className="text-2xl font-bold">مدیریت حسابداری</h1>
-            <RemainingBudgetTable passengers={passengers} expenses={expenses} setRemainingBudgetCount={setRemainingBudgetCount} />
-            <DebtorsTable passengers={passengers} expenses={expenses} numberSupervisors={numberSupervisors} remainingBudgetCount={remainingBudgetCount} />
+          <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center mb-20" style={{ backgroundImage: `url(${shoppingBackground})` }}>
+            <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg">
+              <h2 className="text-3xl font-semibold mb-4 text-white text-center mb-10">هزینه‌ها</h2>
+              <ExpenseForm
+                expenseType={expenseType}
+                setExpenseType={setExpenseType}
+                expenseDate={expenseDate}
+                setExpenseDate={setExpenseDate}
+                expenseAmount={expenseAmount}
+                setExpenseAmount={setExpenseAmount}
+                handleRegisterExpense={handleRegisterExpense}
+              />
+
+              {expenses.length > 0 && (
+                <>
+                  <ExpenseTable
+                    expenses={formattedExpenses}
+                    setSelectedExpense={setSelectedExpense}
+                    handleDeleteExpense={handleDeleteExpense}
+                  />
+                  <div className="flex flex-col items-center w-full">
+                    <SummaryTableExpense totalExpenses={totalExpenses} title="مجموع هزینه ها" label="هزینه کل" />
+                    <SummaryTableExpense totalExpenses={remainingBudget} title="باقیمانده بودجه با کسر هزینه ها" label="بودجه باقی مانده" />
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className=" bg-cover bg-center rounded-lg p-20" style={{ backgroundImage: `url(${supervisorsBackground})` }}>
+            <div className="bg-black/10 backdrop-invert backdrop-opacity-10 p-20 rounded-lg w-full flex flex-col items-center">
+              <h1 className="text-white font-bold text-3xl">مدیریت مالی سرپرستان</h1>
+              <ShareTable passengers={passengers} expenses={expenses} />
+              <RemainingBudgetTable passengers={passengers} expenses={expenses} setRemainingBudgetCount={setRemainingBudgetCount} />
+              <DebtorsTable passengers={passengers} expenses={expenses} numberSupervisors={numberSupervisors} remainingBudgetCount={remainingBudgetCount} />
+            </div>
           </div>
 
           <div>

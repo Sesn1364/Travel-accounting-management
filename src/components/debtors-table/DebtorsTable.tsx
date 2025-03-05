@@ -15,8 +15,8 @@ const DebtorsTable: React.FC<RemainingBudgetTableProps & { numberSupervisors: nu
   const denominator = remainingBudgetCount || 1; // اگر مقدار 0 شد، تقسیم بر 1 می‌شود تا خطا ندهد
 
   return (
-    <div className="mt-6 p-4 bg-red-100 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">🚨 بدهکاران</h2>
+    <div className="mt-6 p-4 bg-red-100 rounded-lg shadow-md w-2/3">
+      <h2 className="text-xl font-semibold mb-4 text-center">بدهکاران</h2>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
@@ -34,9 +34,9 @@ const DebtorsTable: React.FC<RemainingBudgetTableProps & { numberSupervisors: nu
 
             return (
               <tr key={debtor.name} className="bg-white">
-                <td className="border border-gray-300 px-4 py-2">{debtor.name}</td>
-                <td className="border border-gray-300 px-4 py-2 text-red-600">{debtAmount.toFixed()} تومان</td>
-                <td className="border border-gray-300 px-4 py-2">{adjustedAmount} تومان</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{debtor.name}</td>
+                <td className="border border-gray-300 px-4 py-2 text-red-600 text-center">{debtAmount.toFixed()} تومان</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{adjustedAmount} تومان</td>
               </tr>
             );
           })}
