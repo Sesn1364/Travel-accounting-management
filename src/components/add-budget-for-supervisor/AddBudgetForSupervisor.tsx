@@ -1,12 +1,7 @@
-import { useState } from "react";
+import useBudgetManager from "../../hooks/useBudgetManager";
 import Button from "../button/Button";
 import InputField from "../field/InputField";
-
-interface Passenger {
-  id: string;
-  name: string;
-  depositGeneralBudget: string;
-}
+import { Passenger } from "../../types/Accounting/accountingTypes";
 
 const AddBudgetForSupervisor = ({
   passengers,
@@ -15,54 +10,8 @@ const AddBudgetForSupervisor = ({
   passengers: Passenger[];
   updatePassengers: () => void;
 }) => {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [amount, setAmount] = useState("");
-  const [error, setError] = useState("");
-
-  const currentDate = new Date().toISOString().split("T")[0];
-
-  const handleAddBudget = async () => {
-    if (!name || !date || !amount) {
-      setError("لطفا تمام فیلدها را مقداردهی نمایید");
-      return;
-    }
-
-    const passenger = passengers.find((p) => p.name === name);
-    if (!passenger) {
-      setError("این سرپرست در این سفر وجود ندارد");
-      return;
-    }
-
-    if (date < currentDate) {
-      setError("این تاریخ گذشته است");
-      return;
-    }
-
-    const parsedAmount = Number(amount);
-    if (parsedAmount <= 0) {
-      setError("مبلغ واریزی نباید 0 یا منفی باشد.");
-      return;
-    }
-    const updatedBudget = Number(passenger.depositGeneralBudget) + parsedAmount;
-
-    try {
-      await fetch(`http://localhost:5000/passengers/${passenger.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ depositGeneralBudget: updatedBudget.toString() }),
-      });
-
-      updatePassengers();
-      setError("");
-      setName("");
-      setDate("");
-      setAmount("");
-    } catch (error) {
-      setError("خطا در ذخیره‌سازی اطلاعات");
-      console.error("خطا در بروزرسانی بودجه:", error);
-    }
-  };
+  const { name, setName, date, setDate, amount, setAmount, error, handleAddBudget } =
+    useBudgetManager(passengers, updatePassengers);
 
   return (
     <div className="max-w-3xl w-full bg-[#0f172a]/60 backdrop-blur-lg p-8 mx-auto mt-10 rounded-2xl shadow-2xl border border-white/20">
