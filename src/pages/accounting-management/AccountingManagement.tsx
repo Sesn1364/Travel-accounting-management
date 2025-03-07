@@ -16,6 +16,7 @@ import travelersPhoto from "../../assets/images/jeshoots-com-mSESwdMZr-A-unsplas
 import accountingPageBackground from "../../assets/images/raphael-nogueira-svbDI1Pq30s-unsplash.jpg"
 import shoppingBackground from "../../assets/images/maria-lin-kim-8RaUEd8zD-U-unsplash.jpg"
 import supervisorsBackground from "../../assets/images/toa-heftiba-x9I-6yoXrXE-unsplash.jpg"
+import depositMoneyBackground from "../../assets/images/alexander-grey--8a5eJ1-mmQ-unsplash.jpg"
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -113,7 +114,7 @@ const AccountingManagement: React.FC = () => {
           </div>
 
           <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center mb-20" style={{ backgroundImage: `url(${shoppingBackground})` }}>
-            <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg">
+            <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg flex flex-col items-center">
               <h2 className="text-3xl font-semibold mb-4 text-white text-center mb-10">هزینه‌ها</h2>
               <ExpenseForm
                 expenseType={expenseType}
@@ -132,7 +133,7 @@ const AccountingManagement: React.FC = () => {
                     setSelectedExpense={setSelectedExpense}
                     handleDeleteExpense={handleDeleteExpense}
                   />
-                  <div className="flex flex-col items-center w-full">
+                  <div className="w-2/3">
                     <SummaryTableExpense totalExpenses={totalExpenses} title="مجموع هزینه ها" label="هزینه کل" />
                     <SummaryTableExpense totalExpenses={remainingBudget} title="باقیمانده بودجه با کسر هزینه ها" label="بودجه باقی مانده" />
                   </div>
@@ -150,8 +151,11 @@ const AccountingManagement: React.FC = () => {
             </div>
           </div>
 
-          <div>
-            <AddBudget passengers={passengers.map(p => ({ ...p, id: p.id || "" }))} updatePassengers={setPassengers} />
+          <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center mb-20" style={{ backgroundImage: `url(${depositMoneyBackground})` }}>
+            <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg flex flex-col items-center">
+              <h2 className="text-3xl font-semibold mb-4 text-white text-center mb-10">مدیریت بودجه</h2>
+              <AddBudget passengers={passengers.map(p => ({ ...p, id: p.id || "" }))} updatePassengers={setPassengers} />
+            </div>
           </div>
 
         </div>

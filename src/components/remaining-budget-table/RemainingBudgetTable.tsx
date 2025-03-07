@@ -3,7 +3,7 @@ import { useShareCalculation } from "../../hooks/useCalculateShare";
 import { RemainingBudgetTableProps } from "../../types/Accounting/accountingTypes";
 
 interface Props extends RemainingBudgetTableProps {
-  setRemainingBudgetCount: (count: number) => void; // تابع برای ارسال تعداد رکوردهای مثبت
+  setRemainingBudgetCount: (count: number) => void;
 }
 
 const RemainingBudgetTable: React.FC<Props> = ({ passengers, expenses, setRemainingBudgetCount }) => {
@@ -15,39 +15,49 @@ const RemainingBudgetTable: React.FC<Props> = ({ passengers, expenses, setRemain
     return deposit - share > 0;
   });
 
-  // ارسال تعداد رکوردهای مثبت به والد
   React.useEffect(() => {
     setRemainingBudgetCount(positiveRecords.length);
   }, [positiveRecords.length, setRemainingBudgetCount]);
 
   return (
-    <div className="mt-6 p-4 bg-green-100 rounded-lg shadow-md w-1/2 mb-20 overflow-hidden">
-      <h2 className="text-xl font-semibold mb-4 text-center">باقی‌مانده‌ی هر سرپرست از بودجه‌ی واریزی</h2>
-      <div className="max-h-[150px] overflow-y-auto">
-      <table className="w-full border-collapse border border-gray-300">
-        <thead className="sticky top-0">
-          <tr className="bg-gray-200">
-            <th className="border border-gray-300 px-4 py-2">نام سرپرست</th>
-            <th className="border border-gray-300 px-4 py-2">باقی‌مانده از بودجه</th>
-          </tr>
-        </thead>
-        <tbody>
-          {passengers.map(passenger => {
-            const share = parseFloat(calculateShare(passenger.name));
-            const deposit = parseFloat(passenger.depositGeneralBudget);
-            const remainingBudget = deposit - share;
+    <div className="relative w-full max-w-2xl p-6 bg-white/10 backdrop-blur-2xl rounded-3xl shadow-xl border border-gray-100/40 overflow-hidden flex flex-col items-center justify-center mt-10">
+      {/* افکت گرادینت بالای جدول */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500"></div>
 
-            return (
-              <tr key={passenger.name} className="bg-white">
-                <td className="border border-gray-300 px-4 py-2 text-center">{passenger.name}</td>
-                <td className="border border-gray-300 px-4 py-2 text-center">
-                  {remainingBudget.toFixed()} تومان
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {/* عنوان جدول */}
+      <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md text-center">
+        باقی‌مانده‌ی هر سرپرست از بودجه‌ی واریزی
+      </h2>
+
+      <div className="max-h-[300px] overflow-y-auto w-full">
+        <table className="min-w-full table-auto border-collapse bg-white/10 backdrop-blur-lg shadow-lg rounded-3xl overflow-hidden">
+          <thead>
+            <tr className="text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-lg font-semibold">
+              <th className="px-6 py-4 text-center">نام سرپرست</th>
+              <th className="px-6 py-4 text-center">باقی‌مانده از بودجه</th>
+            </tr>
+          </thead>
+          <tbody>
+            {passengers.map(passenger => {
+              const share = parseFloat(calculateShare(passenger.name));
+              const deposit = parseFloat(passenger.depositGeneralBudget);
+              const remainingBudget = deposit - share;
+
+              return (
+                <tr key={passenger.name} className="transition-all duration-500 hover:scale-105 hover:shadow-2xl group">
+                  <td className="relative py-6 px-8 text-center text-white text-xl font-medium bg-gradient-to-r from-purple-500 to-indigo-500">
+                    {passenger.name}
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                  </td>
+                  <td className="relative py-6 px-8 text-center text-white text-xl font-medium bg-gradient-to-r from-indigo-500 to-blue-500">
+                    {remainingBudget.toFixed()} تومان
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

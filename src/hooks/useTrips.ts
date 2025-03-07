@@ -15,7 +15,7 @@ export const useTrips = () => {
   // دریافت لیست سفرها از API هنگام لود شدن صفحه
   useEffect(() => {
     fetchTrips()
-      .then((data) => dispatch(setTrips(data))) 
+      .then((data) => dispatch(setTrips(data)))
       .catch((error) => console.error("خطا در دریافت سفرها:", error));
   }, [dispatch]);
 
@@ -86,4 +86,3 @@ export const useTrips = () => {
     handleDeleteTrip,
   };
 };
-

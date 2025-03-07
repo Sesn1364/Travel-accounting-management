@@ -6,7 +6,7 @@ const SummaryTable: React.FC<SummaryTableProps> = ({ totalFamilyMembers, totalDe
     <div className="flex flex-col items-center justify-center mt-10">
       {/* عنوان */}
       <h3 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">
-         جمع ورودی‌های سفر 
+        جمع ورودی‌های سفر
       </h3>
 
       {/* کانتینر جدول با افکت شیشه‌ای و نئومورفیسم */}
