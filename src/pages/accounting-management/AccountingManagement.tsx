@@ -8,15 +8,11 @@ import PassengerForm from "../../components/passenger-form/PassengerForm";
 import ExpenseForm from "../../components/expense-form/ExpenseForm";
 import ExpenseTable from "../../components/expense-table/ExpenseTable";
 import SummaryTableExpense from "../../components/summary-table-expense/SummaryTableExpense";
-import ShareTable from "../../components/share-table/ShareTable"; // 📌 اضافه شد
-import RemainingBudgetTable from "../../components/remaining-budget-table/RemainingBudgetTable"
-import DebtorsTable from "../../components/debtors-table/DebtorsTable"
-import AddBudget from "../../components/add-budget-for-supervisor/AddBudgetForSupervisor"
-import travelersPhoto from "../../assets/images/jeshoots-com-mSESwdMZr-A-unsplash.jpg"
-import accountingPageBackground from "../../assets/images/raphael-nogueira-svbDI1Pq30s-unsplash.jpg"
-import shoppingBackground from "../../assets/images/maria-lin-kim-8RaUEd8zD-U-unsplash.jpg"
-import supervisorsBackground from "../../assets/images/toa-heftiba-x9I-6yoXrXE-unsplash.jpg"
-import depositMoneyBackground from "../../assets/images/alexander-grey--8a5eJ1-mmQ-unsplash.jpg"
+import ShareTable from "../../components/share-table/ShareTable";
+import RemainingBudgetTable from "../../components/remaining-budget-table/RemainingBudgetTable";
+import DebtorsTable from "../../components/debtors-table/DebtorsTable";
+import AddBudget from "../../components/add-budget-for-supervisor/AddBudgetForSupervisor";
+import imagePaths from "../../utils/imagePaths";
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -78,7 +74,7 @@ const AccountingManagement: React.FC = () => {
   const setPassengers = () => { };
 
   return (
-    <div className="p-4 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${accountingPageBackground})` }}>
+    <div className="p-4 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${imagePaths.accountManagementPageBackground})` }}>
       <p className="text-white text-right text-sm mb-4">{currentDate}</p>
       <h1 className="text-2xl font-bold mb-4 text-center text-white">مدیریت حسابداری</h1>
 
@@ -88,7 +84,7 @@ const AccountingManagement: React.FC = () => {
             <h2 className="text-lg font-semibold">🛫 نام سفر: {trip.name}</h2>
             <h3 className="text-lg font-medium text-gray-700">📅 تاریخ سفر: {trip.date}</h3>
           </div>
-          <div className=" bg-cover bg-center mb-20 rounded-lg mt-6 p-20 shadow-md bg-gray-100" style={{ backgroundImage: `url(${travelersPhoto})` }}>
+          <div className=" bg-cover bg-center mb-20 rounded-lg mt-6 p-20 shadow-md bg-gray-100" style={{ backgroundImage: `url(${imagePaths.travelerBackground})` }}>
             <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg flex flex-col items-center">
               <PassengerForm
                 passengerName={passengerName}
@@ -113,7 +109,7 @@ const AccountingManagement: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center mb-20" style={{ backgroundImage: `url(${shoppingBackground})` }}>
+          <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center mb-20" style={{ backgroundImage: `url(${imagePaths.shoppingBackground})` }}>
             <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg flex flex-col items-center">
               <h2 className="text-3xl font-semibold mb-4 text-white text-center mb-10">هزینه‌ها</h2>
               <ExpenseForm
@@ -142,7 +138,7 @@ const AccountingManagement: React.FC = () => {
             </div>
           </div>
 
-          <div className=" bg-cover bg-center rounded-lg p-20" style={{ backgroundImage: `url(${supervisorsBackground})` }}>
+          <div className=" bg-cover bg-center rounded-lg p-20" style={{ backgroundImage: `url(${imagePaths.supervisorsBackground})` }}>
             <div className="bg-black/10 backdrop-invert backdrop-opacity-10 p-20 rounded-lg w-full flex flex-col items-center">
               <h1 className="text-white font-bold text-3xl">مدیریت مالی سرپرستان</h1>
               <ShareTable passengers={passengers} expenses={expenses} />
@@ -151,7 +147,7 @@ const AccountingManagement: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center mb-20" style={{ backgroundImage: `url(${depositMoneyBackground})` }}>
+          <div className="mt-6 p-20 bg-gray-100 rounded-lg shadow-md bg-cover bg-center mb-20" style={{ backgroundImage: `url(${imagePaths.depositMoneyBackground})` }}>
             <div className="bg-black/30 backdrop-invert backdrop-opacity-20 p-50 rounded-lg flex flex-col items-center">
               <h2 className="text-3xl font-semibold mb-4 text-white text-center mb-10">مدیریت بودجه</h2>
               <AddBudget passengers={passengers.map(p => ({ ...p, id: p.id || "" }))} updatePassengers={setPassengers} />
