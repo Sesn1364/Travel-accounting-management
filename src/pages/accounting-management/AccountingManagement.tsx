@@ -13,6 +13,7 @@ import RemainingBudgetTable from "../../components/remaining-budget-table/Remain
 import DebtorsTable from "../../components/debtors-table/DebtorsTable";
 import AddBudget from "../../components/add-budget-for-supervisor/AddBudgetForSupervisor";
 import imagePaths from "../../utils/imagePaths";
+import { calculateTotalFamilyMembers, calculateTotalDeposit, calculateRemainingBudget } from "../../utils/accountingUtils";
 
 const AccountingManagement: React.FC = () => {
   const {
@@ -46,22 +47,10 @@ const AccountingManagement: React.FC = () => {
   const [selectedExpense, setSelectedExpense] = useState<string | null>(null);
 
   const currentDate = new Date().toLocaleDateString();
-  const totalFamilyMembers = passengers.reduce(
-    (acc, passenger) => acc + parseInt(passenger.numberFamilyMembers),
-    0
-  );
 
-  const totalDeposit =
-    passengers.reduce(
-      (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
-      0
-    );
-
-  const remainingBudget =
-    passengers.reduce(
-      (acc, passenger) => acc + parseFloat(passenger.depositGeneralBudget || "0"),
-      0
-    ) - totalExpenses;
+  const totalFamilyMembers = calculateTotalFamilyMembers(passengers);
+  const totalDeposit = calculateTotalDeposit(passengers);
+  const remainingBudget = calculateRemainingBudget(passengers, totalExpenses);
 
   const formattedExpenses = expenses.map(expense => ({
     ...expense,
@@ -158,7 +147,6 @@ const AccountingManagement: React.FC = () => {
       ) : (
         <p className="text-gray-600 text-center">⏳ در حال بارگذاری...</p>
       )}
-
 
     </div>
   );
